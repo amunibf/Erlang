@@ -17,7 +17,7 @@ pong()->
 			io:format("Pong received ping~n",[]),
 			Pong_PID !pong,
 			pong()
-		end.
+	end.
 start() ->
 	Pong_PID=spawn(tut15, pong, []),
     spawn(tut15, ping, [3, Pong_PID]).
