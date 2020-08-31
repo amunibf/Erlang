@@ -2,6 +2,7 @@
 -module(tut5).
 -export([format_temps/1]).
 
+% only this function is exported
 format_temps([])->
     ok;
 format_temps([City|Rest])->
@@ -15,5 +16,5 @@ convert_to_celcius({Name, {f, Temp}})->
 
 print_temp({Name, {c, Temp}})->
     io:format("~-15w ~w c~n", [Name, Temp]).
-    
+
 

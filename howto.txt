@@ -1,1 +1,3 @@
 erl -noshell -s helloworld start -s init stop
+
+tut5:format_temps([{moscow, {c,-10}}, {cspe_town, {f,70}}, {stockholm, {c, -4}}, {paris, {f,28}}, {london, {f,36}}]).
