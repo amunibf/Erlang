@@ -10,8 +10,8 @@ server(User_List)->
         {From, logon, Name}->
             New_User_List = server_logon(From, Name, User_List),
             server(New_User_List);
-        {From, logon, Name}->
-            New_User_List = server_logon(From, Name, User_List),
+        {From, logoff, Name}->
+            New_User_List = server_logoff(From, Name, User_List),
             server(New_User_List);
         {From, message_to, To, Message}->
             server_transfer(From, To, Message, User_List),
@@ -40,7 +40,7 @@ server_transfer(From, To, Message, User_List)->
         false -> 
             From  ! {messenger, stop, you_are_not_logged_on};
         {value, {From, Name}} ->
-            server_transfer(From, To, Message, User_List)
+            server_transfer(From, Name, To, Message, User_List)
     end.
 
 server_transfer(From, Name, To, Message, User_List)->

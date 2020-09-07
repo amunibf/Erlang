@@ -13,9 +13,9 @@ ping(N, Pong_PID)->
 pong()->
 	receive 
 		finished -> io:format("Pong finished~n",[]);
-		{ping, Pong_PID}->
+		{ping, Ping_PID}->
 			io:format("Pong received ping~n",[]),
-			Pong_PID !pong,
+			Ping_PID !pong,
 			pong()
 	end.
 start() ->
