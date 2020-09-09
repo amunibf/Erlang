@@ -3,15 +3,15 @@
 
 
 server_node()->
-    messenger@amunibf.
+    server@amunibf1.
 
 server(User_List)->
     receive
         {From, logon, Name}->
             New_User_List = server_logon(From, Name, User_List),
             server(New_User_List);
-        {From, logoff, Name}->
-            New_User_List = server_logoff(From, Name, User_List),
+        {From, logoff}->
+            New_User_List = server_logoff(From, User_List),
             server(New_User_List);
         {From, message_to, To, Message}->
             server_transfer(From, To, Message, User_List),
@@ -20,7 +20,7 @@ server(User_List)->
     end.
 
 start_server()->
-    register(messenger, spawn(messenger, server, ([]))).
+    register(messenger, spawn(messenger, server, [[]])).
 
 server_logon(From, Name, User_List)->
     case lists:keymember(Name, 2, User_List) of
@@ -32,7 +32,7 @@ server_logon(From, Name, User_List)->
             [{From, Name} | User_List ]
     end.
 
-server_logoff(From, name, User_List)->
+server_logoff(From, User_List)->
     lists:keydelete(From, 1, User_List).
 
 server_transfer(From, To, Message, User_List)->
